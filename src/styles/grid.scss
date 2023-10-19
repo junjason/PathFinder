@@ -1,0 +1,25 @@
+.grid-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+}
+
+.grid-container > table {
+    width: 90vw;
+    height: auto;
+    overflow: auto;
+    padding: 20px;
+    border-spacing: 0px;
+}
+
+.grid-container > table > tr {
+    height: 10px;
+    gap: 0;
+}
+
+.grid-container > table > tr > td {
+    height: 15px;
+    border: 1px solid lightblue;
+    gap: 0;
+}

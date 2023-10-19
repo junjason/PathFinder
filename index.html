@@ -7,11 +7,26 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="./dist/main.css" />
     <script src="./dist/main.js"></script>
+    <script src="https://kit.fontawesome.com/7cab9565f5.js" crossorigin="anonymous"></script>
     <title>PathFinder | Jason Jun</title>
   </head>
 
   <body>
-    <div id="main">Hello from index.html. Something went wrong</div>
+    <div class="nav">
+        <a href="#">PathFinder</a>
+        <button class="BFS">Visualize BFS</button>
+        <button class="DFS">Visualize DFS</button>
+    </div>
+
+    <div id="node-key">
+        <div><i class="fa-solid fa-location-arrow"></i> Start Node</div>
+        <div><i class="fa-regular fa-circle-xmark"></i> End Node</div>
+        <div><i class="fa-solid fa-square"></i> Wall Nodes</div>
+        <div><i class="fa-solid fa-cookie-bite"></i>Visited Nodes</div>
+    </div>
+    
+    <div class="grid-container">
+    </div>
   </body>
 
 </html>

@@ -1,7 +1,8 @@
-import Example from "./scripts/example";
+import Grid from "./scripts/grid";
 
 document.addEventListener("DOMContentLoaded", () => {
     // console.log("Hello from index.js");
-    const main = document.getElementById("main");
-    const example = new Example(main);
+    const gridContainer = document.querySelector(".grid-container");
+    const grid = new Grid(gridContainer);
 });
+

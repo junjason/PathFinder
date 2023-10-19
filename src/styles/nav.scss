@@ -1,0 +1,47 @@
+$yellow: rgb(209, 195, 2);
+$blue: rgb(84, 84, 248);
+
+
+/* nav styling */
+.nav {
+    overflow: hidden;
+    background-color: $yellow;
+}
+
+.nav a {
+    float: left;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.nav a:hover {
+    color: $blue;
+}
+
+.algo-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.nav > button {
+    margin: 15px;
+}
+
+/* Node Key Styling */
+#node-key {
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 100px;
+    margin: 30px;
+    background-color: $blue;
+}
+
+#node-key i {
+    width: 20px;
+    height: 20px;
+}
