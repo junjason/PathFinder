@@ -35,16 +35,17 @@ class Grid {
             let row = document.createElement("tr");       // for each row, create row and add into table
             row.classList.add(`row-${j}`);                            // add a class of row {row#}
             for(let k = 0; k < numCols; k++) {
-                let sq = document.createElement("td");
-                sq.classList.add(`${j}-${k}`);
-                row.appendChild(sq);
+                let node = document.createElement("td");
+                node.classList.add(`n-${j}-${k}`);
+                row.appendChild(node);
             }
             floor.appendChild(row);
         }
         this.gridContainer.appendChild(floor);
 
-        let start = document.querySelector('[class="11-11"]');
-        let end = document.querySelector('[class="11-34"]');
+        let start = document.querySelector(".n-11-11");
+        let end = document.querySelector(".n-11-31");
+        // debugger;
         start.classList.add("start");
         end.classList.add("end");
 
@@ -53,7 +54,6 @@ class Grid {
 
         start.innerHTML = "<i class=\"fas fa-location-arrow\"></i>";
         end.innerHTML = "<i class=\"far fa-times-circle\"></i>";
-        
     }
 }
 
