@@ -20,6 +20,7 @@ class Route {
             // if next === end
             if (this.getPos(next).join("-") === this.getPos(this.end).join("-")) {
                 this.animateVisited();
+                this.backTrack();
                 return true;
             }
             
@@ -144,45 +145,46 @@ class Route {
         }
     }
 
-    // backTrack() {
-    //     // start at end node + use cookies to find path from end to start
-    //     let currentNode = this.end;
-    //     this.routeFromEndToStart = [];
-    //     while (this.getPos(currentNode).join("-") !== this.getPos(this.start).join("-")) {
-    //         debugger;
-    //         this.routeFromEndToStart.push(currentNode);
-    //         let currPos = this.getPos(currentNode);
+    backTrack() {
+        // start at end node + use cookies to find path from end to start
+        let currentNode = this.end;
+        this.routeFromEndToStart = [];
+        while (this.getPos(currentNode).join("-") !== this.getPos(this.start).join("-")) {
+            // console.log("hi")
+            // debugger;
+            this.routeFromEndToStart.push(currentNode);
+            let currPos = this.getPos(currentNode);
 
-    //         // came from south, go south
-    //         if (currentNode.classList.contains("cookie-south")) {
-    //             let down = document.querySelector(`.n-${parseInt(currPos[0])+1}-${currPos[1]}`);
-    //             currentNode = down;
-    //         }
-    //         else if (currentNode.classList.contains("cookie-north")) {
-    //             let up = document.querySelector(`.n-${parseInt(currPos[0])-1}-${currPos[1]}`);
-    //             currentNode = up;
-    //         }
-    //         else if (currentNode.classList.contains("cookie-east")) {
-    //             let right = document.querySelector(`.n-${currPos[0]}-${parseInt(currPos[1])-1}`);
-    //             currentNode = right;
-    //         }
-    //         else if (currentNode.classList.contains("cookie-west")) {
-    //             let left = document.querySelector(`.n-${currPos[0]}-${parseInt(currPos[1])+1}`);
-    //             currentNode = left;
-    //         }            
-    //     }
-    //     this.routeFromEndToStart.push(currentNode);
-    //     this.animateBackTrack();
-    // }
+            // came from south, go south
+            if (currentNode.classList.contains("cookie-south")) {
+                let down = document.querySelector(`.n-${parseInt(currPos[0])+1}-${currPos[1]}`);
+                currentNode = down;
+            }
+            else if (currentNode.classList.contains("cookie-north")) {
+                let up = document.querySelector(`.n-${parseInt(currPos[0])-1}-${currPos[1]}`);
+                currentNode = up;
+            }
+            else if (currentNode.classList.contains("cookie-east")) {
+                let right = document.querySelector(`.n-${currPos[0]}-${parseInt(currPos[1])+1}`);
+                currentNode = right;
+            }
+            else if (currentNode.classList.contains("cookie-west")) {
+                let left = document.querySelector(`.n-${currPos[0]}-${parseInt(currPos[1])-1}`);
+                currentNode = left;
+            }            
+        }
+        this.routeFromEndToStart.push(currentNode);
+        this.animateBackTrack();
+    }
 
-    // animateBackTrack() {
-    //     for (let i = this.routeFromEndToStart.length-1; i >= 0; i--) {
-    //         // debugger;
-    //         setTimeout(() => {
-    //             this.routeFromEndToStart[i].style.backgroundColor = 'yellow';
-    //         }, 25*i);
-    //     }
-    // }
+    animateBackTrack() {
+        for (let i = this.routeFromEndToStart.length-1; i >= 0; i--) {
+            // debugger;
+            setTimeout(() => {
+                this.routeFromEndToStart[i].style.backgroundColor = 'yellow';
+            }, 25*i);
+        }
+    }
 }
 
 export default Route;

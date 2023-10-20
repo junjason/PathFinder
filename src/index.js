@@ -16,7 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
         let end = document.querySelector(".end");
         let route = new Route(grid, start, end);
         let pathFound = route.runBFS();
-        if (pathFound) route.backTrack();
+        // debugger;
+        // if (pathFound) route.backTrack();
     });
 
     visualizeDFS.addEventListener("click", () => {
