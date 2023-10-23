@@ -76,6 +76,7 @@ class Route {
         stack.push(this.start);
         this.visitedInOrder = [];
 
+        // debugger;
         while (stack.length !== 0) {
             let next = stack.pop();
             // if next === end
@@ -83,43 +84,48 @@ class Route {
                 this.animateVisited();
                 return true;
             }
+            
             // if not, visit all the neighbors + add them to the queue
             let nextPos = this.getPos(next);
 
             // visit east
             let left = document.querySelector(`.n-${nextPos[0]}-${parseInt(nextPos[1])+1}`);
-            if (left && !visited.has(this.getPos(left).join("-"))) {
+            if (left && !visited.has(this.getPos(left).join("-")) && left.dataset.status !== "wall") {
                 left.classList.add("cookie-west");
                 this.visitedInOrder.push(left);
                 stack.push(left);
                 visited.add(this.getPos(left).join("-"));
+                if (left.dataset.status !== "end" || left.dataset.status !== "start") left.dataset.status = "visited";
             }
             
             // visit south
             let down = document.querySelector(`.n-${parseInt(nextPos[0])+1}-${nextPos[1]}`);
-            if (down && !visited.has(this.getPos(down).join("-"))) {
+            if (down && !visited.has(this.getPos(down).join("-")) && down.dataset.status !== "wall") {
                 down.classList.add("cookie-north");
                 this.visitedInOrder.push(down);
                 stack.push(down);
                 visited.add(this.getPos(down).join("-"));
+                if (down.dataset.status !== "end" || down.dataset.status !== "start") down.dataset.status = "visited";
             }
 
             // visit west
             let right = document.querySelector(`.n-${nextPos[0]}-${parseInt(nextPos[1])-1}`);
-            if (right && !visited.has(this.getPos(right).join("-"))) {
+            if (right && !visited.has(this.getPos(right).join("-")) && right.dataset.status !== "wall") {
                 right.classList.add("cookie-east");
                 this.visitedInOrder.push(right);
                 stack.push(right);
                 visited.add(this.getPos(right).join("-"));
+                if (right.dataset.status !== "end" || right.dataset.status !== "start") right.dataset.status = "visited";
             }
 
             // visit north
             let up = document.querySelector(`.n-${parseInt(nextPos[0])-1}-${nextPos[1]}`);
-            if (up && !visited.has(this.getPos(up).join("-"))) {
+            if (up && !visited.has(this.getPos(up).join("-")) && up.dataset.status !== "wall") {
                 up.classList.add("cookie-south");
                 this.visitedInOrder.push(up);
                 stack.push(up);
                 visited.add(this.getPos(up).join("-"));
+                if (up.dataset.status !== "end" || up.dataset.status !== "start") up.dataset.status = "visited";
             }
         }
         this.animateVisited();
@@ -140,8 +146,12 @@ class Route {
         for (let i = 0; i < this.visitedInOrder.length; i++) {
             // debugger;
             setTimeout(() => {
-                this.visitedInOrder[i].classList.add("visited-anim");
+                this.visitedInOrder[i].classList.add("visited-anim"); 
             }, 25*i);
+
+            if (i === this.visitedInOrder.length-1) {
+                setTimeout(() => {this.animateBackTrack();}, 25*i);
+            }
         }
     }
 
@@ -175,12 +185,10 @@ class Route {
         }
         this.routeFromStartToEnd.push(currentNode);
         this.routeFromStartToEnd.reverse();
-        this.animateBackTrack();
     }
 
     animateBackTrack() {
         for (let i = 0; i < this.routeFromStartToEnd.length; i++) {
-            // debugger;
             setTimeout(() => {
                 this.routeFromStartToEnd[i].style.backgroundColor = 'yellow';
             }, 25*i);
