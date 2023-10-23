@@ -210,6 +210,8 @@ class Route {
                 this.routeFromStartToEnd[i].style.backgroundColor = "yellow";
             }, 25*i);
         }
+        let statsP = document.querySelector("#stats-p");
+        statsP.innerHTML = `Length of path is ${this.routeFromStartToEnd.length}. Total number of visited nodes is ${this.visitedInOrder.length}.`
     }
 }
 
