@@ -4,7 +4,7 @@ class Route {
         this.start = start;
         this.end = end;
         this.visitedInOrder = [];
-        this.routeFromEndToStart = [];
+        this.routeFromStartToEnd = [];
     }
 
     // finds BFS - logic only
@@ -20,7 +20,6 @@ class Route {
             // if next === end
             if (this.getPos(next).join("-") === this.getPos(this.end).join("-")) {
                 this.animateVisited();
-                this.backTrack();
                 return true;
             }
             
@@ -29,38 +28,42 @@ class Route {
 
             // visit east
             let left = document.querySelector(`.n-${nextPos[0]}-${parseInt(nextPos[1])+1}`);
-            if (left && !visited.has(this.getPos(left).join("-"))) {
+            if (left && !visited.has(this.getPos(left).join("-")) && left.dataset.status !== "wall") {
                 left.classList.add("cookie-west");
                 this.visitedInOrder.push(left);
                 queue.push(left);
                 visited.add(this.getPos(left).join("-"));
+                if (left.dataset.status !== "end" || left.dataset.status !== "start") left.dataset.status = "visited";
             }
             
             // visit south
             let down = document.querySelector(`.n-${parseInt(nextPos[0])+1}-${nextPos[1]}`);
-            if (down && !visited.has(this.getPos(down).join("-"))) {
+            if (down && !visited.has(this.getPos(down).join("-")) && down.dataset.status !== "wall") {
                 down.classList.add("cookie-north");
                 this.visitedInOrder.push(down);
                 queue.push(down);
                 visited.add(this.getPos(down).join("-"));
+                if (down.dataset.status !== "end" || down.dataset.status !== "start") down.dataset.status = "visited";
             }
 
             // visit west
             let right = document.querySelector(`.n-${nextPos[0]}-${parseInt(nextPos[1])-1}`);
-            if (right && !visited.has(this.getPos(right).join("-"))) {
+            if (right && !visited.has(this.getPos(right).join("-")) && right.dataset.status !== "wall") {
                 right.classList.add("cookie-east");
                 this.visitedInOrder.push(right);
                 queue.push(right);
                 visited.add(this.getPos(right).join("-"));
+                if (right.dataset.status !== "end" || right.dataset.status !== "start") right.dataset.status = "visited";
             }
 
             // visit north
             let up = document.querySelector(`.n-${parseInt(nextPos[0])-1}-${nextPos[1]}`);
-            if (up && !visited.has(this.getPos(up).join("-"))) {
+            if (up && !visited.has(this.getPos(up).join("-")) && up.dataset.status !== "wall") {
                 up.classList.add("cookie-south");
                 this.visitedInOrder.push(up);
                 queue.push(up);
                 visited.add(this.getPos(up).join("-"));
+                if (up.dataset.status !== "end" || up.dataset.status !== "start") up.dataset.status = "visited";
             }
         }
         this.animateVisited();
@@ -137,10 +140,7 @@ class Route {
         for (let i = 0; i < this.visitedInOrder.length; i++) {
             // debugger;
             setTimeout(() => {
-                if (!this.visitedInOrder[i].classList.contains("start") && 
-                    !this.visitedInOrder[i].classList.contains("end") ) {
-                    this.visitedInOrder[i].innerHTML = "<i class=\"fa-solid fa-cookie-bite\"></i>";
-                }
+                this.visitedInOrder[i].classList.add("visited-anim");
             }, 25*i);
         }
     }
@@ -148,11 +148,11 @@ class Route {
     backTrack() {
         // start at end node + use cookies to find path from end to start
         let currentNode = this.end;
-        this.routeFromEndToStart = [];
+        this.routeFromStartToEnd = [];
         while (this.getPos(currentNode).join("-") !== this.getPos(this.start).join("-")) {
             // console.log("hi")
             // debugger;
-            this.routeFromEndToStart.push(currentNode);
+            this.routeFromStartToEnd.push(currentNode);
             let currPos = this.getPos(currentNode);
 
             // came from south, go south
@@ -173,15 +173,16 @@ class Route {
                 currentNode = left;
             }            
         }
-        this.routeFromEndToStart.push(currentNode);
+        this.routeFromStartToEnd.push(currentNode);
+        this.routeFromStartToEnd.reverse();
         this.animateBackTrack();
     }
 
     animateBackTrack() {
-        for (let i = this.routeFromEndToStart.length-1; i >= 0; i--) {
+        for (let i = 0; i < this.routeFromStartToEnd.length; i++) {
             // debugger;
             setTimeout(() => {
-                this.routeFromEndToStart[i].style.backgroundColor = 'yellow';
+                this.routeFromStartToEnd[i].style.backgroundColor = 'yellow';
             }, 25*i);
         }
     }

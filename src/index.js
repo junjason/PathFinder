@@ -16,8 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let end = document.querySelector(".end");
         let route = new Route(grid, start, end);
         let pathFound = route.runBFS();
-        // debugger;
-        // if (pathFound) route.backTrack();
+        if (pathFound) route.backTrack();
     });
 
     visualizeDFS.addEventListener("click", () => {
@@ -27,6 +26,11 @@ document.addEventListener("DOMContentLoaded", () => {
         let pathFound = route.runDFS();
         if (pathFound) route.backTrack();
     });
+
+    let clearBoard = document.querySelector(".resetBoard")
+    clearBoard.addEventListener("click", () => {
+        grid.resetBoard();
+    })
 });
 
 
