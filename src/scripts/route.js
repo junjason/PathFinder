@@ -207,7 +207,7 @@ class Route {
     animateBackTrack() {
         for (let i = 0; i < this.routeFromStartToEnd.length; i++) {
             setTimeout(() => {
-                this.routeFromStartToEnd[i].style.backgroundColor = 'yellow';
+                this.routeFromStartToEnd[i].style.backgroundColor = "yellow";
             }, 25*i);
         }
     }
