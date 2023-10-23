@@ -14,16 +14,8 @@ class Route {
         queue.push(this.start);
         this.visitedInOrder = [];
 
-        // debugger;
         while (queue.length !== 0) {
             let next = queue.shift();
-            // if next === end
-            if (this.getPos(next).join("-") === this.getPos(this.end).join("-")) {
-                this.animateVisited();
-                return true;
-            }
-            
-            // if not, visit all the neighbors + add them to the queue
             let nextPos = this.getPos(next);
 
             // visit east
@@ -34,6 +26,10 @@ class Route {
                 queue.push(left);
                 visited.add(this.getPos(left).join("-"));
                 if (left.dataset.status !== "end" || left.dataset.status !== "start") left.dataset.status = "visited";
+                if (this.getPos(left).join("-") === this.getPos(this.end).join("-")) {
+                    this.animateVisited();
+                    return true;
+                }
             }
             
             // visit south
@@ -44,6 +40,10 @@ class Route {
                 queue.push(down);
                 visited.add(this.getPos(down).join("-"));
                 if (down.dataset.status !== "end" || down.dataset.status !== "start") down.dataset.status = "visited";
+                if (this.getPos(down).join("-") === this.getPos(this.end).join("-")) {
+                    this.animateVisited();
+                    return true;
+                }
             }
 
             // visit west
@@ -54,6 +54,10 @@ class Route {
                 queue.push(right);
                 visited.add(this.getPos(right).join("-"));
                 if (right.dataset.status !== "end" || right.dataset.status !== "start") right.dataset.status = "visited";
+                if (this.getPos(right).join("-") === this.getPos(this.end).join("-")) {
+                    this.animateVisited();
+                    return true;
+                }
             }
 
             // visit north
@@ -64,6 +68,10 @@ class Route {
                 queue.push(up);
                 visited.add(this.getPos(up).join("-"));
                 if (up.dataset.status !== "end" || up.dataset.status !== "start") up.dataset.status = "visited";
+                if (this.getPos(up).join("-") === this.getPos(this.end).join("-")) {
+                    this.animateVisited();
+                    return true;
+                }
             }
         }
         this.animateVisited();
@@ -79,13 +87,6 @@ class Route {
         // debugger;
         while (stack.length !== 0) {
             let next = stack.pop();
-            // if next === end
-            if (this.getPos(next).join("-") === this.getPos(this.end).join("-")) {
-                this.animateVisited();
-                return true;
-            }
-            
-            // if not, visit all the neighbors + add them to the queue
             let nextPos = this.getPos(next);
 
             // visit east
@@ -96,6 +97,10 @@ class Route {
                 stack.push(left);
                 visited.add(this.getPos(left).join("-"));
                 if (left.dataset.status !== "end" || left.dataset.status !== "start") left.dataset.status = "visited";
+                if (this.getPos(left).join("-") === this.getPos(this.end).join("-")) {
+                    this.animateVisited();
+                    return true;
+                }
             }
             
             // visit south
@@ -106,6 +111,10 @@ class Route {
                 stack.push(down);
                 visited.add(this.getPos(down).join("-"));
                 if (down.dataset.status !== "end" || down.dataset.status !== "start") down.dataset.status = "visited";
+                if (this.getPos(down).join("-") === this.getPos(this.end).join("-")) {
+                    this.animateVisited();
+                    return true;
+                }
             }
 
             // visit west
@@ -116,6 +125,10 @@ class Route {
                 stack.push(right);
                 visited.add(this.getPos(right).join("-"));
                 if (right.dataset.status !== "end" || right.dataset.status !== "start") right.dataset.status = "visited";
+                if (this.getPos(right).join("-") === this.getPos(this.end).join("-")) {
+                    this.animateVisited();
+                    return true;
+                }
             }
 
             // visit north
@@ -126,6 +139,10 @@ class Route {
                 stack.push(up);
                 visited.add(this.getPos(up).join("-"));
                 if (up.dataset.status !== "end" || up.dataset.status !== "start") up.dataset.status = "visited";
+                if (this.getPos(up).join("-") === this.getPos(this.end).join("-")) {
+                    this.animateVisited();
+                    return true;
+                }
             }
         }
         this.animateVisited();

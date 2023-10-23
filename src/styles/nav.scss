@@ -1,11 +1,18 @@
-$yellow: rgb(209, 195, 2);
-$blue: rgb(84, 84, 248);
+$pink: lightpink;
+$green: rgb(63, 205, 113);
 
 
 /* nav styling */
 .nav {
     overflow: hidden;
-    background-color: $yellow;
+    background-color: $green;
+    display: flex;
+}
+
+.main-link {
+    margin-top: 5px;
+    align-items: center;
+    justify-content: center;
 }
 
 .nav a {
@@ -14,11 +21,12 @@ $blue: rgb(84, 84, 248);
     text-align: center;
     padding: 15px;
     text-decoration: none;
-    font-size: 17px;
+    font-size: 24px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .nav a:hover {
-    color: $blue;
+    color: $pink;
 }
 
 .algo-dropdown {
@@ -28,6 +36,12 @@ $blue: rgb(84, 84, 248);
 
 .nav > button {
     margin: 15px;
+    padding: 10px 10px;
+    background-color: pink;
+    text-decoration: none;
+    display: inline-block;
+    border: none;
+    border-radius: 10%;
 }
 
 /* Node Key Styling */
@@ -37,11 +51,31 @@ $blue: rgb(84, 84, 248);
     align-items: center;
     justify-content: space-between;
     padding: 20px 100px;
-    margin: 30px;
-    background-color: $blue;
+    background-color: white;
 }
 
-#node-key i {
-    width: 20px;
-    height: 20px;
+#node-key img {
+    height: 18px;
+    width: 18px;
+    border-radius: 10%;
+}
+
+.key-text{
+    padding-left: 10px;
+}
+
+#node-key div {
+    display: flex;
+    align-items: center;
+}
+
+// Directions styling
+#directions {
+    padding: 25px;
+}
+
+#directions p {
+    padding: 5px;
+    font-size: 18px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }

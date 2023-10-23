@@ -21,7 +21,7 @@ class Grid {
                 node.addEventListener("click", () => {
                     if (node.dataset.status === "wall") {
                         node.dataset.status = "unvisited"
-                        node.style.backgroundColor = "white";
+                        node.style.removeProperty("background-color");
                     }
                     else if (node.dataset.status === "unvisited") {
                         node.dataset.status = "wall"
