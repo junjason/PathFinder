@@ -18,9 +18,10 @@ class Grid {
                 node.classList.add(`n-${j}-${k}`);
                 node.classList.add("node");
                 node.dataset.status = "unvisited";
+                node.draggable = false;
                 node.addEventListener("click", () => {
                     if (node.dataset.status === "wall") {
-                        node.dataset.status = "unvisited"
+                        node.dataset.status = "unvisited";
                         node.style.removeProperty("background-color");
                     }
                     else if (node.dataset.status === "unvisited") {
@@ -37,7 +38,7 @@ class Grid {
 
     initializeStartAndEnd() {
         let start = document.querySelector(".n-11-11");
-        let end = document.querySelector(".n-11-31");
+        let end = document.querySelector(".n-11-33");
 
         start.classList.add("start");
         end.classList.add("end");
@@ -54,7 +55,6 @@ class Grid {
         // Add dragstart event listener for the icons
         this.gridContainer.addEventListener("dragstart", (event) => {
             const targetElement = event.target;
-        
             if (targetElement === start) {
                 event.dataTransfer.setData("text", "start");
             } else if (targetElement === end) {
@@ -72,24 +72,28 @@ class Grid {
             const data = event.dataTransfer.getData("text");
             if (data === "start") {
                 const targetNode = event.target;
-                if (!targetNode.classList.contains("node")) return;
+                if (!targetNode.classList.contains("node") || targetNode.dataset.status === "wall") return;
                 targetNode.innerHTML = start.innerHTML; // Update the icon visually
-                start.innerHTML = ""; // Clear the previous icon
                 targetNode.classList.add("start");
-                start.classList.remove("start");
+                targetNode.dataset.status = "start";
                 targetNode.draggable = true; // Set draggable to true again
+                start.innerHTML = ""; // Clear the previous icon
+                start.classList.remove("start");
+                start.dataset.status = "unvisited";
                 start.draggable = false;
-                start = document.querySelector(".start");
+                start = document.querySelector(".start"); // reset start variable so it can be drag and dropped again
             } else if (data === "end") {
                 const targetNode = event.target;
-                if (!targetNode.classList.contains("node")) return;
+                if (!targetNode.classList.contains("node") || targetNode.dataset.status === "wall") return;
                 targetNode.innerHTML = end.innerHTML; // Update the icon visually
-                end.innerHTML = ""; // Clear the previous icon
                 targetNode.classList.add("end");
-                end.classList.remove("end");
+                targetNode.dataset.status = "end";
                 targetNode.draggable = true; // Set draggable to true again
+                end.classList.remove("end");
+                end.innerHTML = ""; // Clear the previous icon
+                end.dataset.status = "unvisited";
                 end.draggable = false;
-                end = document.querySelector(".end");
+                end = document.querySelector(".end");   // reset end variable so it can be drag and dropped again
             }
         });
 

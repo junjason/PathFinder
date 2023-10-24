@@ -84,7 +84,6 @@ class Route {
         stack.push(this.start);
         this.visitedInOrder = [];
 
-        // debugger;
         while (stack.length !== 0) {
             let next = stack.pop();
             let nextPos = this.getPos(next);
