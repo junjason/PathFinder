@@ -14,16 +14,30 @@
   <body>
     <div class="nav">
       <a href="#" class="main-link">PathFinder Visualization</a>
-      <button class="visualizeBFS">Visualize BFS</button>
-      <button class="visualizeDFS">Visualize DFS</button>
+      <div class="dropdown">
+        <button class="dropbtn"><span>▽</span> Select Algorithm</button>
+        <ul id="myDropdown" class="dropdown-content">
+          <li class="selectedBFS"><a href="#">Breadth-First Search</a></li>
+          <li class="selectedDFS"><a href="#">Depth-First Search</a></li>
+        </ul>
+      </div>
+      <button class="visualize">Visualize</button>
       <button class="resetBoard">Reset Board</button>
-      <!-- <button class="placePortals">Place Portals</button> -->
+      <button class="placePortals">Place Portals</button>
+      <div class="dropdown">
+        <button class="dropbtn" id="wallDropBtn"><span>▽</span> Auto Generate Walls</button>
+        <ul id="myDropdown" class="dropdown-content auto-wall-dropdown">
+          <li class="randomWalls"><a href="#">Generate Random Walls</a></li>
+          <li class="randomWalls"><a href="#">Generate Random Maze</a></li>
+          <li class="multiRooms"><a href="#">Generate Multi-Rooms</a></li>
+        </ul>
+      </div>
     </div>
 
     <div id="node-key">
       <div><p class="key-images"><img src = "./src/img/start.png"></p><p class="key-text">Start Node</p></div>
       <div><p class="key-images"><img src = "./src/img/end.png"></p><p class="key-text">End Node</p></div>
-      <!-- <div><p class="key-images"><img src = "./src/img/portal.png"></p><p class="key-text">Portal</p></div> -->
+      <div><p class="key-images"><img src = "./src/img/portal.png"></p><p class="key-text">Portal</p></div>
       <div><p class="key-images"><img src = "./src/img/walls.png"></p><p class="key-text">Wall Nodes</p></div>
       <div><p class="key-images"><img src = "./src/img/unvisited.png"></p><p class="key-text">Unvisited Nodes</p></div>
       <div><p class="key-images"><img src = "./src/img/shortest_path.png"></p><p class="key-text">Shortest Path Nodes</p></div>
