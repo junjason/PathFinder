@@ -8,11 +8,26 @@ document.addEventListener("DOMContentLoaded", () => {
     const gridContainer = document.querySelector(".grid-container");
     grid = new Grid(gridContainer);
 
+    // place portals event handler
+    let portalBtn = document.querySelector(".placePortals");
+    let portalExists = false;
+    portalBtn.addEventListener("click", () => {
+        if (!portalExists) {
+            portalExists = true;
+            grid.placePortals();
+            portalBtn.innerText = "Remove Portals";
+        }
+        else if (portalExists){
+            portalExists = false;
+            grid.removePortals();
+            portalBtn.innerText = "Place Portals";
+        }
+    });
+
     let clearBoard = document.querySelector(".resetBoard")
     clearBoard.addEventListener("click", () => {
         grid.resetBoard();
     })
-
 
     // Drop down functionality for algorithms
     let dropbtn = document.querySelector(".dropbtn");
@@ -29,6 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // algo selection logic
     let algo = null;
     let visualize = document.querySelector(".visualize");
+    let informationDiv = document.getElementById("information");
     visualize.addEventListener("click", () => {
         if (algo === null) {
             visualize.innerText = "Select an algorithm!";
@@ -41,6 +57,11 @@ document.addEventListener("DOMContentLoaded", () => {
             if (pathFound) route.backTrack();
         }
         else if (algo === "dfs") {
+            if (portalExists) {
+                let h1 = document.createElement("h1");
+                h1.innerText = "Portals will not work on DFS until the portal node is at the top of the stack!"
+                informationDiv.appendChild(h1);
+            }
             let start = document.querySelector(".start");
             let end = document.querySelector(".end");
             let route = new Route(grid, start, end);
@@ -61,22 +82,6 @@ document.addEventListener("DOMContentLoaded", () => {
         algo = "dfs";
         visualize.innerText = "Visualize";
         dropdownContent.style.display = "none";
-    });
-
-    // place portals event handler
-    let portalBtn = document.querySelector(".placePortals");
-    let portalExists = false;
-    portalBtn.addEventListener("click", () => {
-        if (!portalExists) {
-            portalExists = true;
-            grid.placePortals();
-            portalBtn.innerHTML = "Remove Portals";
-        }
-        else if (portalExists){
-            portalExists = false;
-            grid.removePortals();
-            portalBtn.innerHTML = "Place Portals";
-        }
     });
 
 

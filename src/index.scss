@@ -3,7 +3,15 @@
 @import "./styles/nav.scss";
 @import "./styles/route.scss";
 
+#links img {
+    height: 35px;
+    width: 35px;
+    padding: 10px;
+}
 
+#links {
+    padding-left: 30px;
+}
 
 
 

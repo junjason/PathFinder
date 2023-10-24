@@ -122,7 +122,7 @@ class Grid {
         endP.draggable = true;
 
         startP.innerHTML = "<i class=\"fa-solid fa-door-open\"></i>";
-        endP.innerHTML = "<i class=\"fa-solid fa-door-open\"></i>";
+        endP.innerHTML = "<i class=\"fa-solid fa-door-closed\"></i>"
 
         // Add dragstart event listener for the icons
         this.gridContainer.addEventListener("dragstart", (event) => {

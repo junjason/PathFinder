@@ -18,59 +18,72 @@ class Route {
             let next = queue.shift();
             let nextPos = this.getPos(next);
 
-            // visit east
-            let left = document.querySelector(`.n-${nextPos[0]}-${parseInt(nextPos[1])+1}`);
-            if (left && !visited.has(this.getPos(left).join("-")) && left.dataset.status !== "wall") {
-                left.classList.add("cookie-west");
-                this.visitedInOrder.push(left);
-                queue.push(left);
-                visited.add(this.getPos(left).join("-"));
-                if (left.dataset.status !== "end" || left.dataset.status !== "start") left.dataset.status = "visited";
-                if (this.getPos(left).join("-") === this.getPos(this.end).join("-")) {
-                    this.animateVisited();
-                    return true;
+            if (next.dataset.portal === "portal-start") {
+                let dest = document.querySelector(".portal-end");
+                // destination is unvisited, add to queue
+                if (dest && !visited.has(this.getPos(dest).join("-"))) {
+                    dest.classList.add("cookie-portal-start");
+                    this.visitedInOrder.push(dest);
+                    queue.push(dest);
+                    visited.add(this.getPos(dest).join("-"));
+                    dest.dataset.status = "visited";
+                } 
+            } 
+            else {
+                // visit east
+                let left = document.querySelector(`.n-${nextPos[0]}-${parseInt(nextPos[1])+1}`);
+                if (left && !visited.has(this.getPos(left).join("-")) && left.dataset.status !== "wall") {
+                    left.classList.add("cookie-west");
+                    this.visitedInOrder.push(left);
+                    queue.push(left);
+                    visited.add(this.getPos(left).join("-"));
+                    if (left.dataset.status !== "end" || left.dataset.status !== "start") left.dataset.status = "visited";
+                    if (this.getPos(left).join("-") === this.getPos(this.end).join("-")) {
+                        this.animateVisited();
+                        return true;
+                    }
                 }
-            }
-            
-            // visit south
-            let down = document.querySelector(`.n-${parseInt(nextPos[0])+1}-${nextPos[1]}`);
-            if (down && !visited.has(this.getPos(down).join("-")) && down.dataset.status !== "wall") {
-                down.classList.add("cookie-north");
-                this.visitedInOrder.push(down);
-                queue.push(down);
-                visited.add(this.getPos(down).join("-"));
-                if (down.dataset.status !== "end" || down.dataset.status !== "start") down.dataset.status = "visited";
-                if (this.getPos(down).join("-") === this.getPos(this.end).join("-")) {
-                    this.animateVisited();
-                    return true;
+                
+                // visit south
+                let down = document.querySelector(`.n-${parseInt(nextPos[0])+1}-${nextPos[1]}`);
+                if (down && !visited.has(this.getPos(down).join("-")) && down.dataset.status !== "wall") {
+                    down.classList.add("cookie-north");
+                    this.visitedInOrder.push(down);
+                    queue.push(down);
+                    visited.add(this.getPos(down).join("-"));
+                    if (down.dataset.status !== "end" || down.dataset.status !== "start") down.dataset.status = "visited";
+                    if (this.getPos(down).join("-") === this.getPos(this.end).join("-")) {
+                        this.animateVisited();
+                        return true;
+                    }
                 }
-            }
 
-            // visit west
-            let right = document.querySelector(`.n-${nextPos[0]}-${parseInt(nextPos[1])-1}`);
-            if (right && !visited.has(this.getPos(right).join("-")) && right.dataset.status !== "wall") {
-                right.classList.add("cookie-east");
-                this.visitedInOrder.push(right);
-                queue.push(right);
-                visited.add(this.getPos(right).join("-"));
-                if (right.dataset.status !== "end" || right.dataset.status !== "start") right.dataset.status = "visited";
-                if (this.getPos(right).join("-") === this.getPos(this.end).join("-")) {
-                    this.animateVisited();
-                    return true;
+                // visit west
+                let right = document.querySelector(`.n-${nextPos[0]}-${parseInt(nextPos[1])-1}`);
+                if (right && !visited.has(this.getPos(right).join("-")) && right.dataset.status !== "wall") {
+                    right.classList.add("cookie-east");
+                    this.visitedInOrder.push(right);
+                    queue.push(right);
+                    visited.add(this.getPos(right).join("-"));
+                    if (right.dataset.status !== "end" || right.dataset.status !== "start") right.dataset.status = "visited";
+                    if (this.getPos(right).join("-") === this.getPos(this.end).join("-")) {
+                        this.animateVisited();
+                        return true;
+                    }
                 }
-            }
 
-            // visit north
-            let up = document.querySelector(`.n-${parseInt(nextPos[0])-1}-${nextPos[1]}`);
-            if (up && !visited.has(this.getPos(up).join("-")) && up.dataset.status !== "wall") {
-                up.classList.add("cookie-south");
-                this.visitedInOrder.push(up);
-                queue.push(up);
-                visited.add(this.getPos(up).join("-"));
-                if (up.dataset.status !== "end" || up.dataset.status !== "start") up.dataset.status = "visited";
-                if (this.getPos(up).join("-") === this.getPos(this.end).join("-")) {
-                    this.animateVisited();
-                    return true;
+                // visit north
+                let up = document.querySelector(`.n-${parseInt(nextPos[0])-1}-${nextPos[1]}`);
+                if (up && !visited.has(this.getPos(up).join("-")) && up.dataset.status !== "wall") {
+                    up.classList.add("cookie-south");
+                    this.visitedInOrder.push(up);
+                    queue.push(up);
+                    visited.add(this.getPos(up).join("-"));
+                    if (up.dataset.status !== "end" || up.dataset.status !== "start") up.dataset.status = "visited";
+                    if (this.getPos(up).join("-") === this.getPos(this.end).join("-")) {
+                        this.animateVisited();
+                        return true;
+                    }
                 }
             }
         }
@@ -88,59 +101,72 @@ class Route {
             let next = stack.pop();
             let nextPos = this.getPos(next);
 
-            // visit east
-            let left = document.querySelector(`.n-${nextPos[0]}-${parseInt(nextPos[1])+1}`);
-            if (left && !visited.has(this.getPos(left).join("-")) && left.dataset.status !== "wall") {
-                left.classList.add("cookie-west");
-                this.visitedInOrder.push(left);
-                stack.push(left);
-                visited.add(this.getPos(left).join("-"));
-                if (left.dataset.status !== "end" || left.dataset.status !== "start") left.dataset.status = "visited";
-                if (this.getPos(left).join("-") === this.getPos(this.end).join("-")) {
-                    this.animateVisited();
-                    return true;
+            if (next.dataset.portal === "portal-start") {
+                let dest = document.querySelector(".portal-end");
+                // destination is unvisited, add to queue
+                if (dest && !visited.has(this.getPos(dest).join("-"))) {
+                    dest.classList.add("cookie-portal-start");
+                    this.visitedInOrder.push(dest);
+                    stack.push(dest);
+                    visited.add(this.getPos(dest).join("-"));
+                    dest.dataset.status = "visited";
+                } 
+            } 
+            else {
+                // visit east
+                let left = document.querySelector(`.n-${nextPos[0]}-${parseInt(nextPos[1])+1}`);
+                if (left && !visited.has(this.getPos(left).join("-")) && left.dataset.status !== "wall") {
+                    left.classList.add("cookie-west");
+                    this.visitedInOrder.push(left);
+                    stack.push(left);
+                    visited.add(this.getPos(left).join("-"));
+                    if (left.dataset.status !== "end" || left.dataset.status !== "start") left.dataset.status = "visited";
+                    if (this.getPos(left).join("-") === this.getPos(this.end).join("-")) {
+                        this.animateVisited();
+                        return true;
+                    }
                 }
-            }
-            
-            // visit south
-            let down = document.querySelector(`.n-${parseInt(nextPos[0])+1}-${nextPos[1]}`);
-            if (down && !visited.has(this.getPos(down).join("-")) && down.dataset.status !== "wall") {
-                down.classList.add("cookie-north");
-                this.visitedInOrder.push(down);
-                stack.push(down);
-                visited.add(this.getPos(down).join("-"));
-                if (down.dataset.status !== "end" || down.dataset.status !== "start") down.dataset.status = "visited";
-                if (this.getPos(down).join("-") === this.getPos(this.end).join("-")) {
-                    this.animateVisited();
-                    return true;
+                
+                // visit south
+                let down = document.querySelector(`.n-${parseInt(nextPos[0])+1}-${nextPos[1]}`);
+                if (down && !visited.has(this.getPos(down).join("-")) && down.dataset.status !== "wall") {
+                    down.classList.add("cookie-north");
+                    this.visitedInOrder.push(down);
+                    stack.push(down);
+                    visited.add(this.getPos(down).join("-"));
+                    if (down.dataset.status !== "end" || down.dataset.status !== "start") down.dataset.status = "visited";
+                    if (this.getPos(down).join("-") === this.getPos(this.end).join("-")) {
+                        this.animateVisited();
+                        return true;
+                    }
                 }
-            }
 
-            // visit west
-            let right = document.querySelector(`.n-${nextPos[0]}-${parseInt(nextPos[1])-1}`);
-            if (right && !visited.has(this.getPos(right).join("-")) && right.dataset.status !== "wall") {
-                right.classList.add("cookie-east");
-                this.visitedInOrder.push(right);
-                stack.push(right);
-                visited.add(this.getPos(right).join("-"));
-                if (right.dataset.status !== "end" || right.dataset.status !== "start") right.dataset.status = "visited";
-                if (this.getPos(right).join("-") === this.getPos(this.end).join("-")) {
-                    this.animateVisited();
-                    return true;
+                // visit west
+                let right = document.querySelector(`.n-${nextPos[0]}-${parseInt(nextPos[1])-1}`);
+                if (right && !visited.has(this.getPos(right).join("-")) && right.dataset.status !== "wall") {
+                    right.classList.add("cookie-east");
+                    this.visitedInOrder.push(right);
+                    stack.push(right);
+                    visited.add(this.getPos(right).join("-"));
+                    if (right.dataset.status !== "end" || right.dataset.status !== "start") right.dataset.status = "visited";
+                    if (this.getPos(right).join("-") === this.getPos(this.end).join("-")) {
+                        this.animateVisited();
+                        return true;
+                    }
                 }
-            }
 
-            // visit north
-            let up = document.querySelector(`.n-${parseInt(nextPos[0])-1}-${nextPos[1]}`);
-            if (up && !visited.has(this.getPos(up).join("-")) && up.dataset.status !== "wall") {
-                up.classList.add("cookie-south");
-                this.visitedInOrder.push(up);
-                stack.push(up);
-                visited.add(this.getPos(up).join("-"));
-                if (up.dataset.status !== "end" || up.dataset.status !== "start") up.dataset.status = "visited";
-                if (this.getPos(up).join("-") === this.getPos(this.end).join("-")) {
-                    this.animateVisited();
-                    return true;
+                // visit north
+                let up = document.querySelector(`.n-${parseInt(nextPos[0])-1}-${nextPos[1]}`);
+                if (up && !visited.has(this.getPos(up).join("-")) && up.dataset.status !== "wall") {
+                    up.classList.add("cookie-south");
+                    this.visitedInOrder.push(up);
+                    stack.push(up);
+                    visited.add(this.getPos(up).join("-"));
+                    if (up.dataset.status !== "end" || up.dataset.status !== "start") up.dataset.status = "visited";
+                    if (this.getPos(up).join("-") === this.getPos(this.end).join("-")) {
+                        this.animateVisited();
+                        return true;
+                    }
                 }
             }
         }
@@ -197,7 +223,11 @@ class Route {
             else if (currentNode.classList.contains("cookie-west")) {
                 let left = document.querySelector(`.n-${currPos[0]}-${parseInt(currPos[1])-1}`);
                 currentNode = left;
-            }            
+            }    
+            else if (currentNode.classList.contains("cookie-portal-start")) {
+                let prev = document.querySelector(".portal-start");
+                currentNode = prev;
+            }        
         }
         this.routeFromStartToEnd.push(currentNode);
         this.routeFromStartToEnd.reverse();
@@ -209,8 +239,6 @@ class Route {
                 this.routeFromStartToEnd[i].style.backgroundColor = "yellow";
             }, 25*i);
         }
-        let statsP = document.querySelector("#stats-p");
-        statsP.innerHTML = `Length of path is ${this.routeFromStartToEnd.length}. Total number of visited nodes is ${this.visitedInOrder.length}.`
     }
 }
 
