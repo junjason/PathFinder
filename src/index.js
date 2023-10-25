@@ -2,11 +2,15 @@ import Grid from "./scripts/grid";
 import Route from "./scripts/route";
 
 let grid = null;
+// let startPos = "";
+// let endPos = "";;
+// let startPortalPos = "";
+// let endPortalPos = "";
 
 document.addEventListener("DOMContentLoaded", () => {
     // console.log("Hello from index.js");
-    const gridContainer = document.querySelector(".grid-container");
-    grid = new Grid(gridContainer);
+    const gridDiv = document.querySelector(".grid");
+    grid = new Grid(gridDiv);
 
     // place portals event handler
     let portalBtn = document.querySelector(".placePortals");
@@ -24,9 +28,15 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    let clearBoard = document.querySelector(".resetBoard")
-    clearBoard.addEventListener("click", () => {
+    // resets board
+    let resetBoard = document.querySelector(".resetBoard")
+    resetBoard.addEventListener("click", () => {
+        if (portalExists){
+            portalExists = false;
+            grid.removePortals();
+        }
         grid.resetBoard();
+        portalBtn.innerText = "Place Portals";
     })
 
     // Drop down functionality for algorithms
@@ -44,7 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // algo selection logic
     let algo = null;
     let visualize = document.querySelector(".visualize");
-    let informationDiv = document.getElementById("information");
     visualize.addEventListener("click", () => {
         if (algo === null) {
             visualize.innerText = "Select an algorithm!";
@@ -53,19 +62,16 @@ document.addEventListener("DOMContentLoaded", () => {
             let start = document.querySelector(".start");
             let end = document.querySelector(".end");
             let route = new Route(grid, start, end);
+            grid.clearBoard();
             let pathFound = route.runBFS();
             if (pathFound) route.backTrack();
         }
         else if (algo === "dfs") {
-            if (portalExists) {
-                let h1 = document.createElement("h1");
-                h1.innerText = "Portals will not work on DFS until the portal node is at the top of the stack!"
-                informationDiv.appendChild(h1);
-            }
             let start = document.querySelector(".start");
             let end = document.querySelector(".end");
             let route = new Route(grid, start, end);
-            let pathFound = route.runDFS();
+            grid.clearBoard();
+            let pathFound = route.runDFS(); 
             if (pathFound) route.backTrack();
         }
     });
@@ -96,8 +102,32 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // logic for auto generate walls
+    // logic for modal
+    // Get the modal
+    let modal = document.getElementById("myModal");
 
+    // Get the button that opens the modal
+    let modalBtn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    let span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on the button, open the modal
+    modalBtn.addEventListener("click", () => {
+        modal.style.display = "block";
+    });
+
+    // When the user clicks on <span> (x), close the modal
+    span.addEventListener("click", () => {
+        modal.style.display = "none";
+    });
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.addEventListener("click", (event) => {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    });
 
     
 

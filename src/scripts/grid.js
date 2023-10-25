@@ -1,32 +1,33 @@
 class Grid {
     constructor(gridContainer) {
         this.gridContainer = gridContainer;
+        this.numRows = 23;
+        this.numCols = 46;
         this.createGrid();
-        this.initializeStartAndEnd();
+        this.initializeStartAndEnd(".n-11-11", ".n-11-33");
     }
 
     createGrid() {
-        const numRows = 23;
-        const numCols = 46;
         let floor = document.createElement("table");      // for each floor, create a table
         floor.classList.add(`table`);
-        for(let j = 0; j < numRows; j++) {
+        for(let j = 0; j < this.numRows; j++) {
             let row = document.createElement("tr");       // for each row, create row and add into table
             row.classList.add(`row-${j}`);                            // add a class of row {row#}
-            for(let k = 0; k < numCols; k++) {
+            for(let k = 0; k < this.numCols; k++) {
                 let node = document.createElement("td");
                 node.classList.add(`n-${j}-${k}`);
                 node.classList.add("node");
                 node.dataset.status = "unvisited";
                 node.dataset.portal = "none";
+                node.dataset.cookie = "none";
                 node.draggable = false;
                 node.addEventListener("click", () => {
                     if (node.dataset.status === "wall") {
                         node.dataset.status = "unvisited";
                         node.style.removeProperty("background-color");
                     }
-                    else if (node.dataset.status === "unvisited") {
-                        node.dataset.status = "wall"
+                    else if (node.dataset.status === "unvisited" && node.dataset.portal === "none") {
+                        node.dataset.status = "wall";
                         node.style.backgroundColor = "black";
                     }
                 });
@@ -37,9 +38,9 @@ class Grid {
         this.gridContainer.appendChild(floor);
     }
 
-    initializeStartAndEnd() {
-        let start = document.querySelector(".n-11-11");
-        let end = document.querySelector(".n-11-33");
+    initializeStartAndEnd(startPos, endPos) {
+        let start = document.querySelector(startPos);
+        let end = document.querySelector(endPos);
 
         start.classList.add("start");
         end.classList.add("end");
@@ -97,20 +98,65 @@ class Grid {
                 end = document.querySelector(".end");   // reset end variable so it can be drag and dropped again
             }
         });
-
-        
     }
 
     resetBoard() {
-        this.gridContainer.innerHTML = "";
+        this.gridContainer.remove();
+        let outerGridContainer = document.querySelector(".grid-container");
+        let newGrid = document.createElement("div");
+        newGrid.classList.add("grid");
+        outerGridContainer.appendChild(newGrid);
+        newGrid = document.querySelector(".grid");
+        this.gridContainer = newGrid;
         this.createGrid();
-        this.initializeStartAndEnd();
+        this.initializeStartAndEnd(".n-11-11", ".n-11-33");
     }
 
+    clearBoard() {
+        // iterate through entire grid
+            // set dataset-cookies to none for all
+            // set dataset-status to unvisited for all
+            // remove visited-anim class if classList contains that
+            // remove backgroundColor property if has background property
+        for (let i = 0; i < this.numRows; i++) {
+            for (let j = 0; j < this.numCols; j++) {
+                let node = document.querySelector(`.n-${i}-${j}`);
+                node.dataset.cookies = "none";
+                if (node.dataset.status === "visited") node.dataset.status = "unvisited";
+                if (node.classList.contains("visited-anim")) node.classList.remove("visited-anim");
+                if (node.classList.contains("shortest-path")) node.classList.remove("shortest-path");
+            }
+        }
+    }
+
+    getPosSelector(node) {
+        let classes = node.className;
+        let classNames = classes.split(" ");
+        let coordinates = classNames[0];
+        return coordinates;
+    }
 
     placePortals() {
-        let startP = document.querySelector(".n-11-14");
-        let endP = document.querySelector(".n-11-30");
+        let startP = document.querySelector(".n-11-13");
+        let endP = document.querySelector(".n-11-31");
+
+        // Implement bfs to add startPortal and endPortal where walls don't exist
+        // if (startP.dataset.status === "wall") {
+        //     let queue = [];
+        //     queue.push(startP);
+        //     while (startP.dataset.status === "wall") {
+        //         next = queue.shift();
+        //         // visit all neighbors and add them to queue
+        //         
+        //         startP = next;
+        //     }
+        // }
+
+        // if (endP.dataset.status === "wall") {
+        //     while (endP.dataset.status === "wall") {
+        //         next = 
+        //     }
+        // }
 
         startP.classList.add("portal-start");
         endP.classList.add("portal-end");

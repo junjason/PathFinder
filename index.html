@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="./dist/main.css" />
     <script src="https://kit.fontawesome.com/7cab9565f5.js" crossorigin="anonymous"></script>
     <script src="./dist/main.js"></script>
-    <title>PathFinder | Jason Jun</title>
+    <title>PathFinder Visualization</title>
+    <link rel="icon" type="image/x-icon" href="./src/img/favicon.ico">
   </head>
 
   <body>
@@ -46,13 +47,23 @@
     </div>
     <div id="information"></div>
     <div class="grid-container">
+      <div class="grid"></div>
     </div>
 
     <div id="directions">
-      <p>1. Drag and drop the start and end nodes</p>
-      <p>2. Click on squares to place walls</p>
-      <!-- <p>2b. Place portals, must be in pairs.</p> -->
-      <p>3. Run Algorithm</p>
+      <!-- Trigger/Open The Modal -->
+      <button id="myBtn"> Instructions </button>
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Some text in the Modal..</p>
+      </div>
+
     </div>
 
     <div id="links">

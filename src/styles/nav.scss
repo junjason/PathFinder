@@ -1,10 +1,11 @@
 $pink: lightpink;
 $green: rgb(63, 205, 113);
-
+$blue: rgb(17, 132, 255);
+$teal: rgb(0, 172, 129);
 /* nav styling */
 .nav {
     overflow: hidden;
-    background-color: $green;
+    background-color: $teal;
     display: flex;
     justify-content: space-between;
 }
@@ -44,14 +45,14 @@ $green: rgb(63, 205, 113);
 }
 
 .resetBoard, .placePortals {
-    background-color: $green !important;
+    background-color: $teal !important;
 }
 
 
 // Dropdown styling
 /* Dropdown Button */
 .dropbtn {
-    background-color: $green;
+    background-color: $teal;
     color: white;
     padding: 16px;
     margin: 0px 10px;
@@ -78,14 +79,14 @@ $green: rgb(63, 205, 113);
 .dropdown-content {
     display: none;
     position: fixed;
-    background-color: #f1f1f1;
+    background-color: $teal;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 2; /* Increase the z-index value */
 }
 
 .dropdown-content a {
-    color: black;
+    color: white;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
@@ -94,8 +95,8 @@ $green: rgb(63, 205, 113);
 }
 
 .dropdown-content a:hover {
-    background-color: #ddd;
-    color: $pink;
+    background-color: $pink;
+    color: white;
 }
 
 .show {display:block;}
@@ -135,15 +136,5 @@ $green: rgb(63, 205, 113);
 #directions p {
     padding: 5px;
     font-size: 18px;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}
-
-
-// Information styling
-#information h1 {
-    display: flex;
-    justify-content: space-around;
-    font-size: 18px;
-    color: $green;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }

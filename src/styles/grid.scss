@@ -1,11 +1,11 @@
-.grid-container {
+.grid {
     display: flex;
     justify-content: center;
     align-items: center;
     height: auto;
 }
 
-.grid-container > table {
+.grid > table {
     width: 100vw;
     height: auto;
     overflow: auto;
@@ -13,19 +13,19 @@
     border-spacing: 0px;
 }
 
-.grid-container > table > tr {
+.grid > table > tr {
     height: 20px;
     gap: 0;
 }
 
-.grid-container > table > tr > td {
+.grid > table > tr > td {
     height: 20px;
     width: 20px;
     border: 2px solid lightblue;
     gap: 0; 
 }
 
-.grid-container > table > tr > td > i {
+.grid > table > tr > td > i {
     display: flex;
     justify-content: center; 
     align-items: center;
