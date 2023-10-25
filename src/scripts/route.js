@@ -19,6 +19,7 @@ class Route {
             let nextPos = this.getPos(next);
 
             this.visitedInOrder.push(next);
+            // visited.add(this.getPos(next).join("-"));
             if (next.dataset.status !== "end" || next.dataset.status !== "start") next.dataset.status = "visited";
             if (this.getPos(next).join("-") === this.getPos(this.end).join("-")) {
                 this.animateVisited();
@@ -64,7 +65,7 @@ class Route {
                 if (up && !visited.has(this.getPos(up).join("-")) && up.dataset.status !== "wall") {
                     up.dataset.cookie = "cookie-south";
                     queue.push(up);
-                    visited.add(this.getPos(up).join("-"));
+                    // visited.add(this.getPos(up).join("-"));
                 }
             }
         }

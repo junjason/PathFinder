@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // place portals event handler
     let portalBtn = document.querySelector(".placePortals");
-    let portalExists = false;
+    let portalExists = true;
     portalBtn.addEventListener("click", () => {
         if (!portalExists) {
             portalExists = true;

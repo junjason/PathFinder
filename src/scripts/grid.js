@@ -5,6 +5,7 @@ class Grid {
         this.numCols = 46;
         this.createGrid();
         this.initializeStartAndEnd(".n-11-11", ".n-11-33");
+        this.placePortals(".n-11-13", ".n-11-31");
     }
 
     createGrid() {
@@ -38,6 +39,10 @@ class Grid {
         this.gridContainer.appendChild(floor);
     }
 
+    randomWalls() {
+
+    }
+
     initializeStartAndEnd(startPos, endPos) {
         let start = document.querySelector(startPos);
         let end = document.querySelector(endPos);
@@ -52,7 +57,7 @@ class Grid {
         end.draggable = true;
 
         start.innerHTML = "<i class=\"fas fa-location-arrow\"></i>";
-        end.innerHTML = "<i class=\"far fa-times-circle\"></i>";
+        end.innerHTML = "<i class=\"fa-solid fa-flag-checkered\"></i>";
 
         // Add dragstart event listener for the icons
         this.gridContainer.addEventListener("dragstart", (event) => {
@@ -110,6 +115,7 @@ class Grid {
         this.gridContainer = newGrid;
         this.createGrid();
         this.initializeStartAndEnd(".n-11-11", ".n-11-33");
+        this.placePortals(".n-11-13", ".n-11-31");
     }
 
     clearBoard() {
@@ -136,9 +142,9 @@ class Grid {
         return coordinates;
     }
 
-    placePortals() {
-        let startP = document.querySelector(".n-11-13");
-        let endP = document.querySelector(".n-11-31");
+    placePortals(startPortalPos, endPortalPos) {
+        let startP = document.querySelector(startPortalPos);
+        let endP = document.querySelector(endPortalPos);
 
         // Implement bfs to add startPortal and endPortal where walls don't exist
         // if (startP.dataset.status === "wall") {
@@ -230,6 +236,10 @@ class Grid {
 
         startP.innerHTML = "";
         endP.innerHTML = "";
+    }
+
+    configOne() {
+
     }
     
 }

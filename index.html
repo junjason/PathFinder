@@ -24,13 +24,13 @@
       </div>
       <button class="visualize">Visualize</button>
       <button class="resetBoard">Reset Board</button>
-      <button class="placePortals">Place Portals</button>
+      <button class="placePortals">Remove Portals</button>
       <div class="dropdown">
-        <button class="dropbtn" id="wallDropBtn"><span>▽</span> Auto Generate Walls</button>
+        <button class="dropbtn" id="wallDropBtn"><span>▽</span> Auto Generate</button>
         <ul id="myDropdown" class="dropdown-content auto-wall-dropdown">
-          <li class="randomWalls"><a href="#">Generate Random Walls</a></li>
-          <li class="randomWalls"><a href="#">Generate Random Maze</a></li>
-          <li class="multiRooms"><a href="#">Generate Multi-Rooms</a></li>
+          <li class="demoOne"><a href="#">Demo 1</a></li>
+          <li class="demoTwo"><a href="#">Demo 2</a></li>
+          <li class="demoThree"><a href="#">Demo 3</a></li>
         </ul>
       </div>
     </div>
@@ -61,14 +61,21 @@
       <!-- Modal content -->
       <div class="modal-content">
         <span class="close">&times;</span>
-        <p>Some text in the Modal..</p>
+        
+        <h1>Instructions</h1>
+        <div id="steps">
+          <div>1. Drag and drop your start and end nodes</div>
+          <div>2. Drag and drop start and end portals. Or remove them by clicking "Remove Portals"</div>
+          <div>3. Place walls by clicking on a node</div>
+          <div>4. Select an algorithm and run!</div>
+        </div>
+
+        <div id="links">
+          <a href="https://github.com/junjason/"><img src="./src/img/github.png"></a>
+          <a href="https://www.linkedin.com/in/jason-jun-0a7576237/"><img src="./src/img/linkedin.png"></a>
+        </div>
       </div>
 
-    </div>
-
-    <div id="links">
-      <a href="https://github.com/junjason/"><img src="./src/img/github.png"></a>
-      <a href="https://www.linkedin.com/in/jason-jun-0a7576237/"><img src="./src/img/linkedin.png"></a>
     </div>
   </body>
 
