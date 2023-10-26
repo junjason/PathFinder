@@ -5,7 +5,6 @@ class Grid {
         this.numCols = 46;
         this.createGrid();
         this.initializeStartAndEnd(".n-11-11", ".n-11-33");
-        // this.placePortals(".n-11-13", ".n-11-31");
     }
 
     createGrid() {

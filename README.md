@@ -15,7 +15,6 @@ Hosted on personal portfolio with github pages.
 # Features to add later
 
 - place portals where walls don't exist, will utilize BFS for worst case scenarios
-- add auto generate wall features
 - add weights and algorithms such as A* and Dijkstra's that account for weights
 - and more!
 
