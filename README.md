@@ -36,18 +36,23 @@ Website splash page
 
 ![plot](./src/img/readme-pics/website.png)
 
-Placing a simple wall and running BFS will look something like this:
+Here is what you can do!
 
-![plot](./src/img/readme-pics/simple-walls.png)
-![plot](./src/img/readme-pics/simple-wall-route.png)
+You can move start and end nodes, which looks like this:
 
-You can also move start and end nodes and run DFS, which looks like this:
+![plot](./src/gifs/move-start-end.gif)
 
-![plot](./src/img/readme-pics/start-end-moved-dfs.png)
+You can place walls:
 
-And finally, you can place portals, add walls and it will generate a path like this using BFS:
+![plot](./src/gifs/place-walls.gif)
 
-![plot](./src/img/readme-pics/two-grid-portals.png)
+And finally, you can place portals, and visualize your algorithm:
+
+![plot](./src/gifs/run-algorithm.gif)
+
+Additionally, you can generate a maze before running the algorithm:
+
+![plot](./src/gifs/generate-maze.gif)
 
 # Important Classes
 
@@ -84,6 +89,7 @@ Create grid function
 Drop event listener for drag and drop functionality for start and end nodes
 
 ![plot](./src/img/readme-pics/drop-event-listener.png)
+
 
 
 

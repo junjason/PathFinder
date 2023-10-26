@@ -34,9 +34,17 @@ document.addEventListener("DOMContentLoaded", () => {
         portalBtn.innerText = "Place Portals";
     })
 
-    let clearBoard = document.querySelector(".clearBoard")
-    clearBoard.addEventListener("click", () => {
+
+    // Clear Board
+    // let clearBoard = document.querySelector(".clearBoard")
+    // clearBoard.addEventListener("click", () => {
+    //     grid.clearBoard();
+    // })
+
+    let generateMaze = document.querySelector(".generateMaze")
+    generateMaze.addEventListener("click", () => {
         grid.clearBoard();
+        grid.generateRandomMaze();
     })
 
     // Drop down Menu

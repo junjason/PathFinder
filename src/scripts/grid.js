@@ -244,6 +244,73 @@ class Grid {
         
     }
     
+    generateRandomMaze() {
+        const cells = document.querySelectorAll('.node');
+        
+        // Initialize all cells as walls
+        for (const cell of cells) {
+            cell.style.backgroundColor = 'black';
+            cell.dataset.status = 'wall';
+        }
+    
+        const stack = [];
+        const startingCell = document.querySelector('.n-1-1');
+        stack.push(startingCell);
+    
+        // Mark the starting cell as a passage
+        startingCell.style.removeProperty("background-color");
+        startingCell.dataset.status = "unvisited";
+    
+        while (stack.length > 0) {
+            const currentCell = stack[stack.length - 1];
+            const [currentRow, currentCol] = this.getPosSelector(currentCell).split("-").slice(1).map(Number);
+    
+            const unvisitedNeighbors = [];
+    
+            // Define possible directions
+            const directions = [
+                { dx: 0, dy: 2 },  // Right
+                { dx: 2, dy: 0 },  // Down
+                { dx: 0, dy: -2 }, // Left
+                { dx: -2, dy: 0 }  // Up
+            ];
+    
+            // Check for unvisited neighbors
+            for (const dir of directions) {
+                const newRow = currentRow + dir.dx;
+                const newCol = currentCol + dir.dy;
+    
+                if (newRow >= 0 && newRow < this.numRows && newCol >= 0 && newCol < this.numCols) {
+                    const neighborCell = document.querySelector(`.n-${newRow}-${newCol}`);
+                    if (neighborCell.dataset.status === 'wall') {
+                        unvisitedNeighbors.push(neighborCell);
+                    }
+                }
+            }
+    
+            if (unvisitedNeighbors.length > 0) {
+                const randomNeighbor = unvisitedNeighbors[Math.floor(Math.random() * unvisitedNeighbors.length)];
+                const [neighborRow, neighborCol] = this.getPosSelector(randomNeighbor).split("-").slice(1).map(Number);
+    
+                // Mark the chosen neighbor as a passage
+                randomNeighbor.style.removeProperty("background-color");
+                randomNeighbor.dataset.status = "unvisited";
+    
+                // Remove the wall between the current cell and the chosen neighbor
+                const pathRow = currentRow + Math.sign(neighborRow - currentRow);
+                const pathCol = currentCol + Math.sign(neighborCol - currentCol);
+                const pathCell = document.querySelector(`.n-${pathRow}-${pathCol}`);
+                pathCell.style.removeProperty("background-color");
+                pathCell.dataset.status = "unvisited";
+    
+                stack.push(randomNeighbor);
+            } else {
+                stack.pop();
+            }
+        }
+    }
+    
+    
 }
 
 export default Grid;
