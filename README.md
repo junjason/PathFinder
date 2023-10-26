@@ -56,10 +56,11 @@ Additionally, you can generate a maze before running the algorithm:
 # Important Classes
 
 Grid.js
-- Responsible for creating grid and adding to HTML (createGrid())
+- Responsible for creating grid and adding to HTML using createGrid()
 - Placing portals
 - Resetting and Clearing the grid
 - Event listeners for wall logic
+- Generates a random maze recursively (using a stack) in generateRandomMaze()
 
 Route.js
 - Finds a path from start to end node using runDFS() and runBFS()
