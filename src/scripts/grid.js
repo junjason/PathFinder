@@ -326,8 +326,15 @@ class Grid {
         // free portals and start and end nodes
         const [startRow, startCol] = this.getPosSelector(start).split("-").slice(1).map(Number);
         const [endRow, endCol] = this.getPosSelector(end).split("-").slice(1).map(Number);
-        const [startPRow, startPCol] = this.getPosSelector(startP).split("-").slice(1).map(Number);
-        const [endPRow, endPCol] = this.getPosSelector(endP).split("-").slice(1).map(Number);
+        let startPRow = null;
+        let startPCol = null;
+        let endPRow = null;
+        let endPCol = null;
+        if (this.hasPortals) {
+            [startPRow, startPCol] = this.getPosSelector(startP).split("-").slice(1).map(Number);
+            [endPRow, endPCol] = this.getPosSelector(endP).split("-").slice(1).map(Number);
+        }
+        
 
         const startNext = document.querySelector(`.n-${startRow+1}-${startCol}`);
         const endNext = document.querySelector(`.n-${endRow+1}-${endCol}`);
