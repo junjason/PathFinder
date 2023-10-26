@@ -5,6 +5,7 @@ class Grid {
         this.numCols = 46;
         this.createGrid();
         this.initializeStartAndEnd(".n-11-11", ".n-11-33");
+        this.hasPortals = false;
     }
 
     createGrid() {
@@ -217,6 +218,8 @@ class Grid {
                 endP = document.querySelector(".portal-end");   // reset end variable so it can be drag and dropped again
             }
         });
+
+        this.hasPortals = true;
     }
 
     removePortals() {
@@ -233,6 +236,8 @@ class Grid {
 
         startP.innerHTML = "";
         endP.innerHTML = "";
+
+        this.hasPortals = false;
     }
 
     randomWalls() {
@@ -245,11 +250,21 @@ class Grid {
     
     generateRandomMaze() {
         const cells = document.querySelectorAll('.node');
-        
+        const start = document.querySelector(".start");
+        const end = document.querySelector(".end");
+        let startP = null;
+        let endP = null;
+        if (this.hasPortals) {
+            startP = document.querySelector(".portal-start");
+            endP = document.querySelector(".portal-end");
+        }
+
         // Initialize all cells as walls
         for (const cell of cells) {
-            cell.style.backgroundColor = 'black';
-            cell.dataset.status = 'wall';
+            if (cell !== start && cell !== end && cell !== startP && cell !== endP) {
+                cell.style.backgroundColor = 'black';
+                cell.dataset.status = 'wall';
+            }
         }
     
         const stack = [];
@@ -307,6 +322,35 @@ class Grid {
                 stack.pop();
             }
         }
+        
+        // free portals and start and end nodes
+        const [startRow, startCol] = this.getPosSelector(start).split("-").slice(1).map(Number);
+        const [endRow, endCol] = this.getPosSelector(end).split("-").slice(1).map(Number);
+        const [startPRow, startPCol] = this.getPosSelector(startP).split("-").slice(1).map(Number);
+        const [endPRow, endPCol] = this.getPosSelector(endP).split("-").slice(1).map(Number);
+
+        const startNext = document.querySelector(`.n-${startRow+1}-${startCol}`);
+        const endNext = document.querySelector(`.n-${endRow+1}-${endCol}`);
+        startNext.style.removeProperty("background-color");
+        startNext.dataset.status = "start";
+
+        endNext.style.removeProperty("background-color");
+        endNext.dataset.status = "end";
+
+        let startPNext = null;
+        let endPNext = null;
+        if (this.hasPortals) {
+            startPNext = document.querySelector(`.n-${startPRow-1}-${startPCol}`);
+            endPNext = document.querySelector(`.n-${endPRow-1}-${endPCol}`);
+
+            startPNext.style.removeProperty("background-color");
+            startPNext.dataset.status = "unvisited";
+    
+            endPNext.style.removeProperty("background-color");
+            endPNext.dataset.status = "unvisited";
+        }
+
+       
     }
     
     
