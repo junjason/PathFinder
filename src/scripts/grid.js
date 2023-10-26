@@ -5,15 +5,15 @@ class Grid {
         this.numCols = 46;
         this.createGrid();
         this.initializeStartAndEnd(".n-11-11", ".n-11-33");
-        this.placePortals(".n-11-13", ".n-11-31");
+        // this.placePortals(".n-11-13", ".n-11-31");
     }
 
     createGrid() {
-        let floor = document.createElement("table");      // for each floor, create a table
+        let floor = document.createElement("table");      
         floor.classList.add(`table`);
         for(let j = 0; j < this.numRows; j++) {
-            let row = document.createElement("tr");       // for each row, create row and add into table
-            row.classList.add(`row-${j}`);                            // add a class of row {row#}
+            let row = document.createElement("tr");       
+            row.classList.add(`row-${j}`);      
             for(let k = 0; k < this.numCols; k++) {
                 let node = document.createElement("td");
                 node.classList.add(`n-${j}-${k}`);
@@ -37,10 +37,6 @@ class Grid {
             floor.appendChild(row);
         }
         this.gridContainer.appendChild(floor);
-    }
-
-    randomWalls() {
-
     }
 
     initializeStartAndEnd(startPos, endPos) {
@@ -80,30 +76,32 @@ class Grid {
             if (data === "start") {
                 const targetNode = event.target;
                 if (!targetNode.classList.contains("node") || targetNode.dataset.status !== "unvisited") return;
-                targetNode.innerHTML = start.innerHTML; // Update the icon visually
+                // transfer HTML, classList, status and draggable to targetNode and reset start
+                targetNode.innerHTML = start.innerHTML;
                 targetNode.classList.add("start");
                 targetNode.dataset.status = "start";
-                targetNode.draggable = true; // Set draggable to true again
-                start.innerHTML = ""; // Clear the previous icon
+                targetNode.draggable = true; 
+                start.innerHTML = ""; 
                 start.classList.remove("start");
                 start.dataset.status = "unvisited";
                 start.draggable = false;
-                start = document.querySelector(".start"); // reset start variable so it can be drag and dropped again
+                start = document.querySelector(".start");   // reset start variable so it can be drag and dropped again
             } else if (data === "end") {
                 const targetNode = event.target;
                 if (!targetNode.classList.contains("node") || targetNode.dataset.status !== "unvisited") return;
-                targetNode.innerHTML = end.innerHTML; // Update the icon visually
+                // transfer HTML, classList, status and draggable to targetNode and reset end
+                targetNode.innerHTML = end.innerHTML; 
                 targetNode.classList.add("end");
                 targetNode.dataset.status = "end";
-                targetNode.draggable = true; // Set draggable to true again
-                end.innerHTML = ""; // Clear the previous icon
+                targetNode.draggable = true; 
+                end.innerHTML = ""; 
                 end.classList.remove("end");
                 end.dataset.status = "unvisited";
                 end.draggable = false;
                 end = document.querySelector(".end");   // reset end variable so it can be drag and dropped again
             }
         });
-    }
+    } 
 
     resetBoard() {
         this.gridContainer.remove();
@@ -115,7 +113,7 @@ class Grid {
         this.gridContainer = newGrid;
         this.createGrid();
         this.initializeStartAndEnd(".n-11-11", ".n-11-33");
-        this.placePortals(".n-11-13", ".n-11-31");
+        // this.placePortals(".n-11-13", ".n-11-31");
     }
 
     clearBoard() {
@@ -238,8 +236,12 @@ class Grid {
         endP.innerHTML = "";
     }
 
-    configOne() {
+    randomWalls() {
 
+    }
+
+    mazeConfigOne() {
+        
     }
     
 }
