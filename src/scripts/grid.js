@@ -2,7 +2,7 @@ class Grid {
     constructor(gridContainer) {
         this.gridContainer = gridContainer;
         this.numRows = 23;
-        this.numCols = 46;
+        this.numCols = 47;
         this.createGrid();
         this.initializeStartAndEnd(".n-11-11", ".n-11-33");
         this.hasPortals = false;
